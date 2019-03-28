@@ -15,13 +15,9 @@ class App extends Component {
     this.handleKeyUpSearch = this.handleKeyUpSearch.bind(this);
   }
 
-  handleKeyUpSearch(e) {
-    console.log("handle Key Up Search page level", e.target.value);
-
-    if (e && e.target && e.target.value !== "") {
-      var searchKeyWord = e.target.value;
+  callSearchApi(searchKeyWord) {
+    if (searchKeyWord !== "") {
       var fetchUrl = `https://api.github.com/search/repositories?q=${searchKeyWord}&sort=stars&order=desc&page=1&per_page=5`;
-
       console.log(fetchUrl);
       // fetch(fetchUrl,
       // {
@@ -47,7 +43,25 @@ class App extends Component {
           repositoriesListData: dummyData.items
         });
       }
+    } else {
+      this.setState({
+        repositoriesListData: []
+      });
     }
+  }
+
+  handleKeyUpSearch(e) {
+    console.log("handle Key Up Search page level", e.target.value);
+    var searchKeyWord = (e && e.target && e.target.value) ? e.target.value : "";
+
+    // The browser url must display the search query upon every keystroke input by the user
+    var queryUrl = `?search=${searchKeyWord}`;
+    if (window && window.history && window.history.pushState) {
+      window.history.pushState(null, null, queryUrl);
+    }
+
+    // Call repository search API here
+    this.callSearchApi(searchKeyWord);
   }
 
   render() {
