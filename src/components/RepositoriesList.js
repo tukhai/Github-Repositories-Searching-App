@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
 class RepositoriesList extends React.Component {
@@ -10,25 +10,30 @@ class RepositoriesList extends React.Component {
   // }
 
   render() {
+    var renderDataList = () => {
+      var dataList = this.props.repositoriesListData.slice();
+
+      return dataList.map((i) => {
+        console.log(i);
+        return (
+          <li key={i.id}>
+            <a href={i.html_url} target="_blank">{i.name}</a>
+          </li>
+        );
+      });
+    }
+
     return (
       <div>
         <ul id="myUL">
-          <li><a href="#">Adele</a></li>
-          <li><a href="#">Agnes</a></li>
-
-          <li><a href="#">Billy</a></li>
-          <li><a href="#">Bob</a></li>
-
-          <li><a href="#">Calvin</a></li>
-          <li><a href="#">Christina</a></li>
-          <li><a href="#">Cindy</a></li>
+          {renderDataList()}
         </ul>
 
-        <div class="center">
-          <div class="pagination">
+        <div className="center">
+          <div className="pagination">
             <a href="#">&laquo;</a>
             <a href="#">1</a>
-            <a href="#" class="active">2</a>
+            <a href="#" className="active">2</a>
             <a href="#">3</a>
             <a href="#">4</a>
             <a href="#">5</a>

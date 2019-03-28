@@ -3,10 +3,57 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchBox from './components/SearchBox.js';
 import RepositoriesList from './components/RepositoriesList.js';
+import dummyData from './dummy-data.json';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      repositoriesListData: [],
+    };
+    this.handleKeyUpSearch = this.handleKeyUpSearch.bind(this);
+  }
+
+  handleKeyUpSearch(e) {
+    console.log("handle Key Up Search page level", e.target.value);
+
+    if (e && e.target && e.target.value !== "") {
+      var searchKeyWord = e.target.value;
+      var fetchUrl = `https://api.github.com/search/repositories?q=${searchKeyWord}&sort=stars&order=desc&page=1&per_page=5`;
+
+      console.log(fetchUrl);
+      // fetch(fetchUrl,
+      // {
+      //   // credential: include
+      //   method: 'GET',
+      //   // headers: new Headers({
+      //   //   'SESS' : session_name + '=' + sessid,
+      //   //   'X-CSRF-TOKEN': token,
+      //   //   'Authorization': 'Basic '+btoa('edge:property'),
+      //   // }),
+      //   // timeout: TIMEOUT
+      // })
+      // .then((response) => response.json())
+      // .then((responseJson) => {
+      //   console.log(responseJson);
+      // })
+      // .catch((error) => {
+      //   console.error(error);
+      // });
+      console.log(dummyData);
+      if (dummyData && dummyData.items && dummyData.items.length > 0) {
+        this.setState({
+          repositoriesListData: dummyData.items
+        });
+      }
+    }
+  }
+
   render() {
+
+    console.log("this.state.repositoriesListData", this.state.repositoriesListData);
+
     return (
       <div className="App">
         {/* <input
@@ -32,9 +79,14 @@ class App extends Component {
         <div className="main-container">
           <h2>Github Repository Search</h2>
 
-          <SearchBox />
+          {/* TO DO: Can improve by using cookie to save previous search keywords and search list results */}
+          <SearchBox 
+            onKeyUpSearch = {this.handleKeyUpSearch}
+          />
 
-          <RepositoriesList />
+          <RepositoriesList 
+            repositoriesListData = {this.state.repositoriesListData}
+          />
         </div>
       </div>
     );
