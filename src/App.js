@@ -15,6 +15,7 @@ class App extends Component {
 
     this.state = {
       repositoriesListData: [],
+      listCountText: "No Repository Found",
       defaultSearchKeyword: defaultSearchKeywordFromQueryUrl
     };
     this.handleKeyUpSearch = this.handleKeyUpSearch.bind(this);
@@ -44,8 +45,18 @@ class App extends Component {
       // });
       console.log(dummyData);
       if (dummyData && dummyData.items && dummyData.items.length > 0) {
+        var statsText = "No Repository Found";
+        if (dummyData.total_count) {
+          if (dummyData.total_count > 1) {
+            statsText = `${dummyData.total_count} Repositories Found`;
+          } else if (dummyData.total_count == 1) {
+            statsText = "1 Repository Found";
+          }
+        }
+
         this.setState({
-          repositoriesListData: dummyData.items
+          repositoriesListData: dummyData.items,
+          listCountText: statsText
         });
       }
     } else {
@@ -56,7 +67,6 @@ class App extends Component {
   }
 
   handleKeyUpSearch(e) {
-    console.log("handle Key Up Search page level", e.target.value);
     var searchKeyword = (e && e.target && e.target.value) ? e.target.value : "";
 
     // The browser url must display the search query upon every keystroke input by the user
@@ -70,15 +80,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("component Did Mount", this.state.defaultSearchKeyword);
-
     // Call repository search API when there's query string in url
     this.callSearchApi(this.state.defaultSearchKeyword);
   }
 
   render() {
-
-    console.log("this.state.repositoriesListData", this.state.repositoriesListData);
 
     return (
       <div className="App">
@@ -110,6 +116,8 @@ class App extends Component {
             onKeyUpSearch = {this.handleKeyUpSearch}
             defaultSearchKeyword = {this.state.defaultSearchKeyword}
           />
+
+          <h4>{this.state.listCountText}</h4>
 
           <RepositoriesList 
             repositoriesListData = {this.state.repositoriesListData}

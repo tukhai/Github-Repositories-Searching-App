@@ -11,7 +11,6 @@ class SearchBox extends React.Component {
   }
 
   handleKeyUp(e) {
-    console.log("handle Key Up");
     if (typeof this.props.onKeyUpSearch === "function") {
       this.props.onKeyUpSearch(e);
     }

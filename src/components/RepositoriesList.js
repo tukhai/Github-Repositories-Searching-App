@@ -14,7 +14,6 @@ class RepositoriesList extends React.Component {
       var dataList = this.props.repositoriesListData.slice();
 
       return dataList.map((i) => {
-        console.log(i);
         return (
           <li key={i.id}>
             <a href={i.html_url} target="_blank">{i.name}</a>
