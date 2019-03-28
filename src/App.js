@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchBox from './components/SearchBox.js';
 import RepositoriesList from './components/RepositoriesList.js';
+import Pagination from './components/Pagination.js'
 import dummyData from './dummy-data.json';
 
 
@@ -15,7 +16,7 @@ class App extends Component {
 
     this.state = {
       repositoriesListData: [],
-      listCountText: "No Repository Found",
+      listCount: 0,
       defaultSearchKeyword: defaultSearchKeywordFromQueryUrl
     };
     this.handleKeyUpSearch = this.handleKeyUpSearch.bind(this);
@@ -45,23 +46,15 @@ class App extends Component {
       // });
       console.log(dummyData);
       if (dummyData && dummyData.items && dummyData.items.length > 0) {
-        var statsText = "No Repository Found";
-        if (dummyData.total_count) {
-          if (dummyData.total_count > 1) {
-            statsText = `${dummyData.total_count} Repositories Found`;
-          } else if (dummyData.total_count == 1) {
-            statsText = "1 Repository Found";
-          }
-        }
-
         this.setState({
           repositoriesListData: dummyData.items,
-          listCountText: statsText
+          listCount: dummyData.total_count
         });
       }
     } else {
       this.setState({
-        repositoriesListData: []
+        repositoriesListData: [],
+        listCount: 0
       });
     }
   }
@@ -85,6 +78,14 @@ class App extends Component {
   }
 
   render() {
+    var statsText = "No Repository Found";
+    if (this.state.listCount) {
+      if (this.state.listCount > 1) {
+        statsText = `${this.state.listCount} Repositories Found`;
+      } else if (this.state.listCount == 1) {
+        statsText = "1 Repository Found";
+      }
+    }
 
     return (
       <div className="App">
@@ -117,11 +118,13 @@ class App extends Component {
             defaultSearchKeyword = {this.state.defaultSearchKeyword}
           />
 
-          <h4>{this.state.listCountText}</h4>
+          <h4>{statsText}</h4>
 
           <RepositoriesList 
             repositoriesListData = {this.state.repositoriesListData}
           />
+
+          <Pagination />
         </div>
       </div>
     );
