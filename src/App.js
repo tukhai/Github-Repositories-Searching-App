@@ -9,15 +9,20 @@ import dummyData from './dummy-data.json';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    let params = new URLSearchParams(window.location.search);
+    let defaultSearchKeywordFromQueryUrl = params.get('search') ? params.get('search') : "";
+
     this.state = {
       repositoriesListData: [],
+      defaultSearchKeyword: defaultSearchKeywordFromQueryUrl
     };
     this.handleKeyUpSearch = this.handleKeyUpSearch.bind(this);
   }
 
-  callSearchApi(searchKeyWord) {
-    if (searchKeyWord !== "") {
-      var fetchUrl = `https://api.github.com/search/repositories?q=${searchKeyWord}&sort=stars&order=desc&page=1&per_page=5`;
+  callSearchApi(searchKeyword) {
+    if (searchKeyword !== "") {
+      var fetchUrl = `https://api.github.com/search/repositories?q=${searchKeyword}&sort=stars&order=desc&page=1&per_page=5`;
       console.log(fetchUrl);
       // fetch(fetchUrl,
       // {
@@ -52,16 +57,23 @@ class App extends Component {
 
   handleKeyUpSearch(e) {
     console.log("handle Key Up Search page level", e.target.value);
-    var searchKeyWord = (e && e.target && e.target.value) ? e.target.value : "";
+    var searchKeyword = (e && e.target && e.target.value) ? e.target.value : "";
 
     // The browser url must display the search query upon every keystroke input by the user
-    var queryUrl = `?search=${searchKeyWord}`;
+    var queryUrl = `?search=${searchKeyword}`;
     if (window && window.history && window.history.pushState) {
       window.history.pushState(null, null, queryUrl);
     }
 
     // Call repository search API here
-    this.callSearchApi(searchKeyWord);
+    this.callSearchApi(searchKeyword);
+  }
+
+  componentDidMount() {
+    console.log("component Did Mount", this.state.defaultSearchKeyword);
+
+    // Call repository search API when there's query string in url
+    this.callSearchApi(this.state.defaultSearchKeyword);
   }
 
   render() {
@@ -96,6 +108,7 @@ class App extends Component {
           {/* TO DO: Can improve by using cookie to save previous search keywords and search list results */}
           <SearchBox 
             onKeyUpSearch = {this.handleKeyUpSearch}
+            defaultSearchKeyword = {this.state.defaultSearchKeyword}
           />
 
           <RepositoriesList 

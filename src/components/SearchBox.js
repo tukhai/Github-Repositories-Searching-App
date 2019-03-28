@@ -26,6 +26,7 @@ class SearchBox extends React.Component {
         onKeyUp={this.handleKeyUp}
         placeholder={"Enter keywords to search for Github repository"}
         title={"Type in a name"}
+        defaultValue={this.props.defaultSearchKeyword ? this.props.defaultSearchKeyword : ""}
       />
     );
   }
