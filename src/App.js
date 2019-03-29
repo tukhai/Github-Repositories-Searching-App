@@ -6,6 +6,7 @@ import RepositoriesList from './components/RepositoriesList.js';
 import Pagination from './components/Pagination.js'
 import dummyData from './dummy-data.json';
 
+const PAGESIZE = 5;
 
 class App extends Component {
   constructor(props) {
@@ -17,14 +18,16 @@ class App extends Component {
     this.state = {
       repositoriesListData: [],
       listCount: 0,
-      defaultSearchKeyword: defaultSearchKeywordFromQueryUrl
+      defaultSearchKeyword: defaultSearchKeywordFromQueryUrl,
+      currentPage: 1
     };
     this.handleKeyUpSearch = this.handleKeyUpSearch.bind(this);
+    this.handleChangePage = this.handleChangePage.bind(this);
   }
 
-  callSearchApi(searchKeyword) {
+  callSearchApi(searchKeyword, page) {
     if (searchKeyword !== "") {
-      var fetchUrl = `https://api.github.com/search/repositories?q=${searchKeyword}&sort=stars&order=desc&page=1&per_page=5`;
+      var fetchUrl = `https://api.github.com/search/repositories?q=${searchKeyword}&sort=stars&order=desc&page=${page ? page : "1"}&per_page=${PAGESIZE}`;
       console.log(fetchUrl);
       // fetch(fetchUrl,
       // {
@@ -69,7 +72,19 @@ class App extends Component {
     }
 
     // Call repository search API here
+    // For task 2, have to do here, so we prevent callSearchApi as handleKeyUpSearch
     this.callSearchApi(searchKeyword);
+  }
+
+  handleChangePage(page) {
+    let params = new URLSearchParams(window.location.search);
+    let currentSearchQuery = params.get('search') ? params.get('search') : "";
+
+    this.setState({
+      currentPage: page
+    });
+
+    this.callSearchApi(currentSearchQuery, page);
   }
 
   componentDidMount() {
@@ -124,7 +139,13 @@ class App extends Component {
             repositoriesListData = {this.state.repositoriesListData}
           />
 
-          <Pagination />
+          <Pagination 
+            totalItems = {this.state.listCount}
+            pageSize = {PAGESIZE}
+            currentPage = {this.state.currentPage}
+            maxPages = {10}
+            onChangePage = {this.handleChangePage}
+          />
         </div>
       </div>
     );

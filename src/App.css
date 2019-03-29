@@ -73,6 +73,7 @@ h2 {
   text-decoration: none;
   transition: background-color .3s;
   border: 1px solid #ddd;
+  cursor: pointer;
   /* margin: 0 4px; */
 }
 
@@ -83,3 +84,8 @@ h2 {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+a.no-click-pagination {
+  pointer-events: none;
+  opacity: 0.8
+}

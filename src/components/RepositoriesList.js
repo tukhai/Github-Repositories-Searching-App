@@ -16,7 +16,7 @@ class RepositoriesList extends React.Component {
       return dataList.map((i) => {
         return (
           <li key={i.id}>
-            <a href={i.html_url} target="_blank">{i.name}</a>
+            <a href={i.html_url} target="_blank" rel="noopener noreferrer">{i.name}</a>
           </li>
         );
       });
