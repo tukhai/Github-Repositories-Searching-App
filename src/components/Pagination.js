@@ -92,6 +92,13 @@ class Pagination extends React.Component {
     this.endPage = endPage;    
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextProps.totalItems !== this.props.totalItems ||
+      nextProps.currentPage !== this.props.currentPage
+    );
+  }
+
   render() {
     this.initStyle();
     this.calculatePagination();

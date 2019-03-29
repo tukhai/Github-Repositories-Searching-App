@@ -16,6 +16,10 @@ class SearchBox extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
   render() {
     return (
       <input 

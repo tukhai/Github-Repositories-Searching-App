@@ -2,12 +2,12 @@ import React from 'react';
 
 
 class RepositoriesList extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: null,
-  //   };
-  // }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      JSON.stringify(nextProps.repositoriesListData) !== JSON.stringify(this.props.repositoriesListData)
+    );
+  }
 
   render() {
     var renderDataList = () => {

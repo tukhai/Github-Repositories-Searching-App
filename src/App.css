@@ -83,6 +83,11 @@ h2 {
   border: 1px solid #ddd;
   cursor: pointer;
 }
+@media screen and (max-width: 767px) {
+  .pagination a {
+    padding: 8px 8px;
+  }
+}
 
 .pagination a.active {
   background-color: #4CAF50;
@@ -155,4 +160,5 @@ a.no-click-pagination {
 .instruction-content {
   width: 80%;
   margin: 0 0 50px 10%;
+  color: red;
 }
