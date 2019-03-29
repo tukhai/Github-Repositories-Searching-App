@@ -1,10 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This project is a part of React Frontend Quiz
 
-In the project directory, you can run:
+In a Redux-backed React App, actions are often dispatched from different places, eg: Mouse click on button, Asynchronous response from http APIs, etc. One challenge of writing an Web Application is that application’s actions are often triggered from url changes.
 
-### `npm start`
+#### Task One
+Create a React web app which can do the following:
+
+Search public Github repositories
+Has a text input field where user can type in the (part of the) name of the Github repository
+The app will then search for the repository via Github API v3, whenever the user is typing in the text input.
+Results of the search must be displayed in a list below the search field. (Just displaying the repositories’ name with anchor link to source it will do)
+The browser url must display the search query upon every keystroke input by the user, something like this:
+  http://localhost:8080?search=react
+Users are allowed to directly visit the domain with search query intact. For example, if user key in http://localhost:8080?search=redux directly into the browser url, the search field should be pre-filled with the word redux and search results list below it should asynchronously display the relevant results.
+
+#### Task Two
+In the Application above, search (API call) will be triggered upon every keystroke from the user. This is not ideal as it will consume up the rate limit too quickly. Without implementing a hard button for the “search action”, how would you design a solution where user can search without pressing a button on UI, while not consuming the quota too quickly.
+
+
+## Project Accessing
+
+### Deployment
+
+This project has been deployed at: https://facebook.github.io/create-react-app/docs/deployment <br>
+Please visit the url to access the project.
+
+### Project clone
+Alternatively, you can clone this project code. In the project directory, you can run it in 1 of the following modes: <br>
+
+#### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -12,12 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -27,42 +47,14 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Explaination
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Task 2 solution
+What I did was clear the exiting setTimout, then creating a setTimeout function after every key press. The setTimeout is 3 seconds, inside setTimeout, I call the github repo api. By this way I can prevent over consumption.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Mobile responsive
+This web app is optimize for both mobile and desktop screen.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### shouldComponentUpdates
+In this app, I also implement React shouldComponentUpdates to optimize performance.

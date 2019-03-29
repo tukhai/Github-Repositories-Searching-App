@@ -113,16 +113,7 @@ class Pagination extends React.Component {
           if(pages.length > 5) {          
             if(this.isFirst) {
               if(page == pages[0] || page == pages[1] || page == pages[2] || page == pages[pages.length-1]) {
-                return(                              
-                    //   <PaginationLink 
-                    //     key={"page_" + page}
-                    //     fontSize={this.fontSize}
-                    //     label={page}
-                    //     page={page}
-                    //     isCurrrent={page == this.currentPage}
-                    //     onClick={this.handleChangePage}
-                    //     paginationUrlObject={this.props.paginationUrlObject}
-                    //   />
+                return(
                     <a 
                         key={"page_" + page}
                         className={page == this.currentPage ? "active" : ""}
@@ -140,16 +131,7 @@ class Pagination extends React.Component {
               }
             } else {            
               if(page == pages[0] || page == pages[pages.length-3] || page == pages[pages.length-2] || page == pages[pages.length-1]) {
-                return(                              
-                    //   <PaginationLink 
-                    //     key={"page_" + page}
-                    //     fontSize={this.fontSize}
-                    //     label={page}
-                    //     page={page}
-                    //     isCurrrent={page == this.currentPage}
-                    //     onClick={this.handleChangePage}
-                    //     paginationUrlObject={this.props.paginationUrlObject}
-                    //   />
+                return(
                     <a 
                         key={"page_" + page}
                         className={page == this.currentPage ? "active" : ""}
@@ -166,24 +148,15 @@ class Pagination extends React.Component {
                 }
               }
             }
-          } else {          
+          } else {
             return(
-            //   <PaginationLink 
-            //     key={"page_" + page}
-            //     fontSize={this.fontSize}
-            //     label={page}
-            //     page={page}
-            //     isCurrrent={page == this.currentPage}
-            //     onClick={this.handleChangePage}
-            //     paginationUrlObject={this.props.paginationUrlObject}
-            //   />
-            <a 
-                key={"page_" + page}
-                className={page == this.currentPage ? "active" : ""}
-                onClick={() => this.handleChangePage(page)}
-            >
-                {page}
-            </a>
+              <a 
+                  key={"page_" + page}
+                  className={page == this.currentPage ? "active" : ""}
+                  onClick={() => this.handleChangePage(page)}
+              >
+                  {page}
+              </a>
             );
           }             
         });
@@ -192,33 +165,16 @@ class Pagination extends React.Component {
     var renderFirstLink = () => {
         if(this.currentPage === 1) {
           return (
-            // <PaginationLink 
-            //   key={"page_first"}
-            //   fontSize={this.fontSize}
-            //   label={"First"}
-            //   page={1}
-            //   isDisabled={true}
-            //   paginationUrlObject={this.props.paginationUrlObject}
-            // />
             <a 
-                key={"page_first"}
-                className="no-click-pagination"
+              key={"page_first"}
+              className="no-click-pagination"
             >
-                First
+              First
             </a>
           );
         }
         else {
           return (
-            // <PaginationLink 
-            //   key={"page_first"}
-            //   fontSize={this.fontSize}
-            //   label={"First"}
-            //   page={1}
-            //   isDisabled={false}
-            //   onClick={this.handleChangePage}
-            //   paginationUrlObject={this.props.paginationUrlObject}
-            // />
             <a 
                 key={"page_first"}
                 onClick={() => this.handleChangePage(1)}
@@ -233,14 +189,6 @@ class Pagination extends React.Component {
         
         if(this.currentPage === this.totalPages) {
           return (
-            // <PaginationLink 
-            //   key={"page_last"}
-            //   fontSize={this.fontSize}
-            //   label={"Last"}
-            //   page={this.totalPages}
-            //   isDisabled={true}
-            //   paginationUrlObject={this.props.paginationUrlObject}
-            // />
             <a 
                 key={"page_last"}
                 className="no-click-pagination"
@@ -251,15 +199,6 @@ class Pagination extends React.Component {
         }
         else {
           return (
-            // <PaginationLink 
-            //   key={"page_last"}
-            //   fontSize={this.fontSize}
-            //   label={"Last"}
-            //   page={this.totalPages}
-            //   isDisabled={false}
-            //   onClick={this.handleChangePage}
-            //   paginationUrlObject={this.props.paginationUrlObject}
-            // />
             <a 
                 key={"page_last"}
                 onClick={() => this.handleChangePage(this.totalPages)}
@@ -273,13 +212,6 @@ class Pagination extends React.Component {
     return (
         <div className="center">
           <div className="pagination">
-            {/* <a href="#">First</a>
-            <a href="#">1</a>
-            <a href="#" className="active">2</a>
-            <a href="#">3</a>
-            <a className="no-click-pagination">...</a>
-            <a href="#">6</a>
-            <a href="#">Last</a> */}
             {renderFirstLink()}
             {renderPageLinks()}
             {renderLastLink()}
