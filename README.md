@@ -27,7 +27,9 @@ This project has been deployed at: [https://github-repo-searching-app.herokuapp.
 Please visit the url to access the project.
 
 ### Project clone
-Alternatively, you can clone this project code. In the project root directory, you can run it in 1 of the following modes: <br>
+Alternatively, you can clone this project code. <br>
+Make sure node and npm are installed in your local machine: <strong>brew install node<strong> <br><br>
+In the project root directory, you can run it in 1 of the following modes: <br>
 
 #### `npm start`
 
