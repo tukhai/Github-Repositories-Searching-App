@@ -31,7 +31,7 @@ Alternatively, you can clone this project code. <br>
 Make sure node and npm are installed in your local machine: <strong>brew install node<strong> <br><br>
 In the project root directory, you can run it in 1 of the following modes: <br>
 
-#### `npm start`
+`npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -39,7 +39,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-#### `npm run build`
+`npm run build`
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -50,11 +50,11 @@ Your app is ready to be deployed!
 
 ## Explaination
 
-#### Task 2 solution
+### Task 2 solution
 What I did was clear the exiting setTimout, then creating a setTimeout function after every key press. The setTimeout is 3 seconds, inside setTimeout, I call the github repo api. By this way I can prevent over consumption.
 
-#### Mobile responsive
+### Mobile responsive
 This web app is optimize for both mobile and desktop screen.
 
-#### shouldComponentUpdates
+### shouldComponentUpdates
 In this app, I also implement React shouldComponentUpdates to optimize performance.
