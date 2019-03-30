@@ -23,11 +23,11 @@ In the Application above, search (API call) will be triggered upon every keystro
 
 ### Deployment
 
-This project has been deployed at: https://facebook.github.io/create-react-app/docs/deployment <br>
+This project has been deployed at: [https://github-repo-searching-app.herokuapp.com/](https://github-repo-searching-app.herokuapp.com/) <br>
 Please visit the url to access the project.
 
 ### Project clone
-Alternatively, you can clone this project code. In the project directory, you can run it in 1 of the following modes: <br>
+Alternatively, you can clone this project code. In the project root directory, you can run it in 1 of the following modes: <br>
 
 #### `npm start`
 
@@ -44,8 +44,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
 ## Explaination
